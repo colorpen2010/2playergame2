@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/2playergame.iml" filepath="$PROJECT_DIR$/.idea/2playergame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/venv/Lib/site-packages/wds_files_general/sprite_types_gen/.idea/sprite_types_gen.iml" filepath="$PROJECT_DIR$/venv/Lib/site-packages/wds_files_general/sprite_types_gen/.idea/sprite_types_gen.iml" />
     </modules>
   </component>
 </project>
