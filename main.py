@@ -19,9 +19,7 @@ bottle1_2 = wrap.sprite.add('bottles', 100, 863, 'bottle1')
 player1 = wrap.sprite.add('mario-1-big', 500, 500, 'stand')
 # player2
 player2 = wrap.sprite.add('mario-2-big', 550, 500, 'stand')
-wrap.sprite.set_reverse_x(player2, True)
 speedy2 = -0
-wrap.sprite.set_reverse_x(player1, True)
 speedy1 = -0
 
 
@@ -100,14 +98,10 @@ def down(keys):
 # hodba2
 @wrap.on_key_always(wrap.K_RIGHT, wrap.K_LEFT)
 def hodba2(keys):
-    player.walk(player2)
     if wrap.K_RIGHT in keys:
-        wrap.sprite.move(player2, 40, 0)
-        wrap.sprite.set_reverse_x(player2, False)
-
+        player.hodba(player2,6)
     if wrap.K_LEFT in keys:
-        wrap.sprite.move(player2, -40, 0)
-        wrap.sprite.set_reverse_x(player2, True)
+        player.hodba(player2,-5)
 
 
 @wrap.on_key_up(wrap.K_RIGHT, wrap.K_LEFT)
@@ -118,15 +112,11 @@ def hodba2s():
 # hodba1
 @wrap.on_key_always(wrap.K_d, wrap.K_a)
 def hodba1(keys):
-    player.walk(player1)
     if wrap.K_d in keys:
-        wrap.sprite.move(player1, 5, 0)
-        wrap.sprite.set_reverse_x(player1, False)
+        player.hodba(player1,5)
 
     if wrap.K_a in keys:
-        wrap.sprite.move(player1, -5, 0)
-        wrap.sprite.set_reverse_x(player1, True)
-
+        player.hodba(player1,-5)
 
 @wrap.on_key_up(wrap.K_a, wrap.K_d)
 def hodba1s():

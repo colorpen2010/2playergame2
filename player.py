@@ -1,4 +1,4 @@
-import wrap
+import wrap, random
 
 
 def changecostume(sprite, costume):
@@ -17,3 +17,12 @@ def walk(p):
         changecostume(p, 'walk3')
     elif cos2 == 'walk3':
         changecostume(p, 'walk1')
+
+
+def hodba(p, storona):
+    wrap.sprite.move(p, storona, 0)
+    walk(p)
+    if storona<0:
+        wrap.sprite.set_reverse_x(p,True)
+    if storona>0:
+        wrap.sprite.set_reverse_x(p,False)
