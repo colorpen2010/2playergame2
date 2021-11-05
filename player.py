@@ -1,11 +1,23 @@
 import wrap, random
 
 
+
 def changecostume(sprite, costume):
     spritebotom = wrap.sprite.get_bottom(sprite)
     wrap.sprite.set_costume(sprite, costume)
     wrap.sprite.move_bottom_to(sprite, spritebotom)
 
+def speeddow(sprite,speed,ground,costume):
+    groundup = wrap.sprite.get_top(ground)
+    spritebotom = wrap.sprite.get_bottom(sprite)
+    wrap.sprite.move(sprite, 0, speed)
+    if spritebotom != groundup:
+        speed += 0.1
+        if wrap.sprite.is_collide_sprite(sprite, ground):
+            speed = 0
+            wrap.sprite.move_bottom_to(sprite, groundup)
+            changecostume(sprite, costume)
+    return speed
 
 def walk(p):
     cos2 = wrap.sprite.get_costume(p)
