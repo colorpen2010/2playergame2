@@ -11,7 +11,7 @@ wrap.sprite.set_size(ground, 1920, 200)
 wrap.sprite.move_left_to(ground, 0)
 wrap.sprite.move_bottom_to(ground, 1080)
 groundup = wrap.sprite.get_top(ground)
-#bottle
+# bottle
 bottle1 = wrap.sprite.add('bottles', 500, 0, 'bottle1')
 
 bottle1_2 = wrap.sprite.add('bottles', 100, 863, 'bottle1')
@@ -60,18 +60,18 @@ def jump1():
 @wrap.always(25)
 def down(keys):
     global speedy2, speedy1, botspeedy
-    speedy1 = player.speeddow(player1, speedy1, ground,'stand')
-    speedy2 = player.speeddow(player2, speedy2, ground,'stand')
-    botspeedy = player.speeddow(bottle1, botspeedy, ground,'bottle1')
+    speedy1 = player.speeddow(player1, speedy1, ground, 'stand')
+    speedy2 = player.speeddow(player2, speedy2, ground, 'stand')
+    botspeedy = player.speeddow(bottle1, botspeedy, ground, 'bottle1')
 
 
 # hodba2
 @wrap.on_key_always(wrap.K_RIGHT, wrap.K_LEFT)
 def hodba2(keys):
     if wrap.K_RIGHT in keys:
-        player.hodba(player2, 6)
+        player.hodba(player2, 6, player1)
     if wrap.K_LEFT in keys:
-        player.hodba(player2, -5)
+        player.hodba(player2, -5, player1)
 
 
 @wrap.on_key_up(wrap.K_RIGHT, wrap.K_LEFT)
@@ -83,10 +83,10 @@ def hodba2s():
 @wrap.on_key_always(wrap.K_d, wrap.K_a)
 def hodba1(keys):
     if wrap.K_d in keys:
-        player.hodba(player1, 5)
+        player.hodba(player1, 5, player2)
 
     if wrap.K_a in keys:
-        player.hodba(player1, -5)
+        player.hodba(player1, -5, player2)
 
 
 @wrap.on_key_up(wrap.K_a, wrap.K_d)

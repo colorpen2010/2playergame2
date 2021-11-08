@@ -1,13 +1,13 @@
 import wrap, random
 
 
-
 def changecostume(sprite, costume):
     spritebotom = wrap.sprite.get_bottom(sprite)
     wrap.sprite.set_costume(sprite, costume)
     wrap.sprite.move_bottom_to(sprite, spritebotom)
 
-def speeddow(sprite,speed,ground,costume):
+
+def speeddow(sprite, speed, ground, costume):
     groundup = wrap.sprite.get_top(ground)
     spritebotom = wrap.sprite.get_bottom(sprite)
     wrap.sprite.move(sprite, 0, speed)
@@ -18,6 +18,7 @@ def speeddow(sprite,speed,ground,costume):
             wrap.sprite.move_bottom_to(sprite, groundup)
             changecostume(sprite, costume)
     return speed
+
 
 def walk(p):
     cos2 = wrap.sprite.get_costume(p)
@@ -31,10 +32,13 @@ def walk(p):
         changecostume(p, 'walk1')
 
 
-def hodba(p, storona):
+def hodba(p, storona, stena):
     wrap.sprite.move(p, storona, 0)
     walk(p)
-    if storona<0:
-        wrap.sprite.set_reverse_x(p,True)
-    if storona>0:
-        wrap.sprite.set_reverse_x(p,False)
+    if wrap.sprite.is_collide_sprite(stena, p):
+        wrap.sprite.move(stena,storona,0)
+
+    if storona < 0:
+        wrap.sprite.set_reverse_x(p, True)
+    if storona > 0:
+        wrap.sprite.set_reverse_x(p, False)
