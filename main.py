@@ -10,6 +10,36 @@ ground = wrap.sprite.add('mario-scenery', 500, 10, 'ground')
 wrap.sprite.set_size(ground, 1920, 200)
 wrap.sprite.move_left_to(ground, 0)
 wrap.sprite.move_bottom_to(ground, 1080)
+
+# ostrowa
+ostrowa = []
+ostrow = wrap.sprite.add('mario-scenery', 550, 450, 'ground')
+wrap.sprite.set_size(ostrow, 200, 20)
+ostrowa.append(ostrow)
+
+ostrow = wrap.sprite.add('mario-scenery', 900, 450, 'ground')
+wrap.sprite.set_size(ostrow, 200, 20)
+ostrowa.append(ostrow)
+
+ostrow = wrap.sprite.add('mario-scenery', 700, 600, 'ground')
+wrap.sprite.set_size(ostrow, 200, 20)
+ostrowa.append(ostrow)
+
+ostrow = wrap.sprite.add('mario-scenery', 700, 300, 'ground')
+wrap.sprite.set_size(ostrow, 200, 20)
+ostrowa.append(ostrow)
+
+ostrow = wrap.sprite.add('mario-scenery', 550, 700, 'ground')
+wrap.sprite.set_size(ostrow, 200, 20)
+ostrowa.append(ostrow)
+
+ostrow = wrap.sprite.add('mario-scenery', 450, 800, 'ground')
+wrap.sprite.set_size(ostrow, 200, 20)
+ostrowa.append(ostrow)
+
+for o in ostrowa:
+    wrap.sprite.set_costume(o, 'block')
+
 groundup = wrap.sprite.get_top(ground)
 # bottle
 bottle1 = wrap.sprite.add('bottles', 500, 0, 'bottle1')
@@ -60,9 +90,26 @@ def jump1():
 @wrap.always(25)
 def down(keys):
     global speedy2, speedy1, botspeedy
+    for o in ostrowa:
+        ostrowdown = wrap.sprite.get_bottom(o)
+        ostrowleft = wrap.sprite.get_left(o)
+        ostrowRight = wrap.sprite.get_right(o)
+        playerLeft = wrap.sprite.get_left(player1)
+        playerright = wrap.sprite.get_right(player1)
+        playerup = wrap.sprite.get_top(player1)
+        if playerLeft >= ostrowRight:
+            wrap.sprite.remove(o)
+            ostrowa.remove(o)
+        elif playerright <= ostrowleft:
+            wrap.sprite.remove(o)
+            ostrowa.remove(o)
+        elif playerup >= ostrowdown:
+            wrap.sprite.remove(o)
+            ostrowa.remove(o)
+
     speedy1 = player.speeddow(player1, speedy1, ground, 'stand')
     speedy2 = player.speeddow(player2, speedy2, ground, 'stand')
-    botspeedy = player.speeddow(bottle1, botspeedy, ground, 'bottle1')
+    botspeedy = player.speeddow(bottle1, botspeedy, player1, 'bottle1')
 
 
 # hodba2
