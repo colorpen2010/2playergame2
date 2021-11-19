@@ -1,4 +1,4 @@
-import wrap, random
+import wrap
 
 
 def changecostume(sprite, costume):

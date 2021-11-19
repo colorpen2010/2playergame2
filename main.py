@@ -10,6 +10,8 @@ ground = wrap.sprite.add('mario-scenery', 500, 10, 'ground')
 wrap.sprite.set_size(ground, 1920, 200)
 wrap.sprite.move_left_to(ground, 0)
 wrap.sprite.move_bottom_to(ground, 1080)
+ground1=ground
+ground2=ground
 
 # ostrowa
 ostrowa = []
@@ -73,6 +75,7 @@ def set1s():
 def jump2():
     global speedy2
     player2y = wrap.sprite.get_bottom(player2)
+    groundup = wrap.sprite.get_top(ground2)
     if player2y == groundup:
         speedy2 = -4
         player.changecostume(player2, 'jump')
@@ -82,6 +85,7 @@ def jump2():
 def jump1():
     global speedy1
     player1y = wrap.sprite.get_bottom(player1)
+    groundup = wrap.sprite.get_top(ground1)
     if player1y == groundup:
         speedy1 = -4
         player.changecostume(player1, 'jump')
@@ -89,27 +93,57 @@ def jump1():
 
 @wrap.always(25)
 def down(keys):
-    global speedy2, speedy1, botspeedy
+    global speedy2, speedy1, botspeedy,ground1,ground2
+    ostrowacopy=list(ostrowa)
     for o in ostrowa:
         ostrowdown = wrap.sprite.get_bottom(o)
         ostrowleft = wrap.sprite.get_left(o)
         ostrowRight = wrap.sprite.get_right(o)
         playerLeft = wrap.sprite.get_left(player1)
         playerright = wrap.sprite.get_right(player1)
-        playerup = wrap.sprite.get_top(player1)
+        playerdown = wrap.sprite.get_bottom(player1)
         if playerLeft >= ostrowRight:
-            wrap.sprite.remove(o)
-            ostrowa.remove(o)
+            ostrowacopy.remove(o)
         elif playerright <= ostrowleft:
-            wrap.sprite.remove(o)
-            ostrowa.remove(o)
-        elif playerup >= ostrowdown:
-            wrap.sprite.remove(o)
-            ostrowa.remove(o)
+            ostrowacopy.remove(o)
+        elif playerdown>= ostrowdown:
+            ostrowacopy.remove(o)
 
-    speedy1 = player.speeddow(player1, speedy1, ground, 'stand')
-    speedy2 = player.speeddow(player2, speedy2, ground, 'stand')
-    botspeedy = player.speeddow(bottle1, botspeedy, player1, 'bottle1')
+    minh = groundup
+    ground1 = ground
+    for o in ostrowacopy:
+        ostrowup = wrap.sprite.get_top(o)
+        if ostrowup < minh:
+            minh = ostrowup
+            ground1 = o
+
+    speedy1 = player.speeddow(player1, speedy1, ground1, 'stand')
+
+    ostrowacopy=list(ostrowa)
+    for o in ostrowa:
+        ostrowdown = wrap.sprite.get_bottom(o)
+        ostrowleft = wrap.sprite.get_left(o)
+        ostrowRight = wrap.sprite.get_right(o)
+        playerLeft = wrap.sprite.get_left(player2)
+        playerright = wrap.sprite.get_right(player2)
+        playerdown = wrap.sprite.get_bottom(player2)
+        if playerLeft >= ostrowRight:
+            ostrowacopy.remove(o)
+        elif playerright <= ostrowleft:
+            ostrowacopy.remove(o)
+        elif playerdown>= ostrowdown:
+            ostrowacopy.remove(o)
+
+    minh = groundup
+    ground2 = ground
+    for o in ostrowacopy:
+        ostrowup = wrap.sprite.get_top(o)
+        if ostrowup < minh:
+            minh = ostrowup
+            ground2 = o
+
+    speedy2 = player.speeddow(player2, speedy2, ground2, 'stand')
+    botspeedy = player.speeddow(bottle1, botspeedy, ground1, 'bottle1')
 
 
 # hodba2
