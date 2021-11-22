@@ -6,6 +6,34 @@ def changecostume(sprite, costume):
     wrap.sprite.set_costume(sprite, costume)
     wrap.sprite.move_bottom_to(sprite, spritebotom)
 
+def semla(sprite,ostrowa,ground):
+    groundup = wrap.sprite.get_top(ground)
+    ostrowacopy=list(ostrowa)
+    if sprite in ostrowacopy:
+        ostrowacopy.remove(sprite)
+
+    for o in list(ostrowacopy):
+        ostrowdown = wrap.sprite.get_bottom(o)
+        ostrowleft = wrap.sprite.get_left(o)
+        ostrowRight = wrap.sprite.get_right(o)
+        playerLeft = wrap.sprite.get_left(sprite)
+        playerright = wrap.sprite.get_right(sprite)
+        playerdown = wrap.sprite.get_bottom(sprite)
+        if playerLeft >= ostrowRight:
+            ostrowacopy.remove(o)
+        elif playerright <= ostrowleft:
+            ostrowacopy.remove(o)
+        elif playerdown>= ostrowdown:
+            ostrowacopy.remove(o)
+
+    minh = groundup
+    ground2 = ground
+    for o in ostrowacopy:
+        ostrowup = wrap.sprite.get_top(o)
+        if ostrowup < minh:
+            minh = ostrowup
+            ground2 = o
+    return ground2
 
 def speeddow(sprite, speed, ground, costume):
     groundup = wrap.sprite.get_top(ground)
